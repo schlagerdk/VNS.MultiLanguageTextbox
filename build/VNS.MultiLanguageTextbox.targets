@@ -8,17 +8,22 @@
 		</Content>
 	</ItemGroup>
 
-	<!-- Copy files to project wwwroot after build -->
-	<Target Name="CopyVNSMultiLanguageTextboxFiles" AfterTargets="Build">
+	<!-- Copy files to project wwwroot only during Build (not Publish) -->
+	<Target Name="CopyVNSMultiLanguageTextboxFiles" AfterTargets="Build" Condition="'$(IsCrossTargetingBuild)' != 'true'">
 		<ItemGroup>
 			<VNSFiles Include="$(MSBuildThisFileDirectory)..\contentFiles\any\any\wwwroot\App_Plugins\VNS.MultiLanguageTextbox\**\*.*" />
 		</ItemGroup>
 
-		<!-- Copy to project root wwwroot (for dotnet run/watch) -->
-		<Copy SourceFiles="@(VNSFiles)" DestinationFiles="@(VNSFiles->'$(ProjectDir)wwwroot\App_Plugins\VNS.MultiLanguageTextbox\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+		<!-- Only copy to project wwwroot if not publishing -->
+		<Copy SourceFiles="@(VNSFiles)" DestinationFiles="@(VNSFiles->'$(ProjectDir)wwwroot\App_Plugins\VNS.MultiLanguageTextbox\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(IsPublishing)' != 'true'" />
+	</Target>
 
-		<!-- Also copy to output directory (for publish) -->
-		<Copy SourceFiles="@(VNSFiles)" DestinationFiles="@(VNSFiles->'$(OutputPath)wwwroot\App_Plugins\VNS.MultiLanguageTextbox\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+	<!-- Remove project wwwroot files before publish to avoid conflicts -->
+	<Target Name="CleanVNSMultiLanguageTextboxFiles" BeforeTargets="PrepareForPublish">
+		<ItemGroup>
+			<VNSFilesToClean Include="$(ProjectDir)wwwroot\App_Plugins\VNS.MultiLanguageTextbox\**\*.*" />
+		</ItemGroup>
+		<Delete Files="@(VNSFilesToClean)" />
 	</Target>
 
 </Project>
