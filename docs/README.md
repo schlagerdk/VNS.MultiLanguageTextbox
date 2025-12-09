@@ -203,24 +203,25 @@ npm run publish
 ./publish.sh
 ```
 
-### Version Management
+### Version Management & Publishing
 
-Version is managed centrally and synchronized across all files:
+Version is managed during the build process. The `publish.sh` script will prompt for a new version or keep the current one:
 
 ```bash
-# Update version in package.json and .csproj
-./set-version.sh 1.0.1
-
-# Then build, commit, tag, and push
+# Run publish script - it will ask for version update
 ./publish.sh
-git commit -am "Bump version to 1.0.1"
-git tag v1.0.1
-git push && git push --tags
+
+# Enter new version when prompted (e.g., 1.0.1) or press Enter to keep current version
+# The script will automatically:
+# - Update version in package.json, .csproj, and umbraco-package.json
+# - Build the Vite project
+# - Create NuGet package
 ```
 
-**Version files:**
+**Version files (automatically synchronized):**
 - `package.json` - NPM package version
 - `VNS.MultiLanguageTextbox.csproj` - NuGet package version
+- `umbraco-package.json` - Umbraco package version
 
 **Versioning strategy (Semantic Versioning):**
 - **Major (1.x.x)**: Breaking changes, incompatible API changes
@@ -230,18 +231,16 @@ git push && git push --tags
 ### Publishing to NuGet.org
 
 ```bash
-# 1. Update version
-./set-version.sh 1.0.1
-
-# 2. Build NuGet package (automatic via publish.sh)
+# 1. Build with version update
 ./publish.sh
+# Enter new version when prompted (e.g., 1.0.1)
 
-# 3. Push to NuGet.org
+# 2. Push to NuGet.org
 dotnet nuget push nupkg/VNS.MultiLanguageTextbox.*.nupkg \
   --api-key YOUR_API_KEY \
   --source https://api.nuget.org/v3/index.json
 
-# 4. Commit and tag
+# 3. Commit and tag
 git commit -am "Release v1.0.1"
 git tag v1.0.1
 git push && git push --tags

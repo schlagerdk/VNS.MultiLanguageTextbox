@@ -5,7 +5,44 @@
 
 set -e
 
+# Get current version from package.json
+CURRENT_VERSION=$(grep -o '"version": "[^"]*"' package.json | grep -o '[0-9]\+\.[0-9]\+\.[0-9]\+')
+
 echo "🔨 Building VNS.MultiLanguageTextbox..."
+echo "Current version: $CURRENT_VERSION"
+echo ""
+read -p "Enter new version (or press Enter to keep $CURRENT_VERSION): " NEW_VERSION
+
+# Update version if provided
+if [ ! -z "$NEW_VERSION" ]; then
+    # Validate semantic version format
+    if ! [[ $NEW_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+        echo "Error: Version must be in semantic version format (e.g., 1.0.1)"
+        exit 1
+    fi
+    
+    echo "🔄 Updating version to $NEW_VERSION..."
+    
+    # Update package.json
+    if command -v jq &> /dev/null; then
+        jq --arg ver "$NEW_VERSION" '.version = $ver' package.json > package.json.tmp && mv package.json.tmp package.json
+    else
+        sed -i '' "s/\"version\": \".*\"/\"version\": \"$NEW_VERSION\"/" package.json
+    fi
+    
+    # Update .csproj
+    sed -i '' "s/<Version>.*<\/Version>/<Version>$NEW_VERSION<\/Version>/" VNS.MultiLanguageTextbox.csproj
+    
+    # Update umbraco-package.json
+    if command -v jq &> /dev/null; then
+        jq --arg ver "$NEW_VERSION" '.version = $ver' umbraco-package.json > umbraco-package.json.tmp && mv umbraco-package.json.tmp umbraco-package.json
+    else
+        sed -i '' "s/\"version\": \".*\"/\"version\": \"$NEW_VERSION\"/" umbraco-package.json
+    fi
+    
+    echo "✅ Version updated to $NEW_VERSION"
+    echo ""
+fi
 
 # Clean previous build
 if [ -d "dist" ]; then

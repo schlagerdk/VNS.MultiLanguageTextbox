@@ -7,7 +7,7 @@
 
 		<!-- NuGet Package Metadata -->
 		<PackageId>VNS.MultiLanguageTextbox</PackageId>
-		<Version>1.0.2</Version>
+		<Version>1.0.3</Version>
 		<Authors>Martin H. Schläger</Authors>
 		<Company>Vital New Software ApS</Company>
 		<Product>VNS.MultiLanguageTextbox</Product>
