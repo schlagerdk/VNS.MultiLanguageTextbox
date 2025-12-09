@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<!-- NuGet Package Metadata -->
+		<PackageId>VNS.MultiLanguageTextbox</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Martin H. Schläger</Authors>
+		<Company>Vital New Software ApS</Company>
+		<Product>VNS.MultiLanguageTextbox</Product>
+		<Description>An Umbraco 14+ property editor plugin for handling multi-language text content. Supports all languages configured in Umbraco, with options for text input or textarea, and required language validation.</Description>
+		<PackageProjectUrl>https://github.com/schlagerdk/VNS.MultiLanguageTextbox</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/schlagerdk/VNS.MultiLanguageTextbox</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>VNS;Vital;New;Software;ApS;Umbraco;Multi-Language;Property Editor;i18n;Localization</PackageTags>
+		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>icon.png</PackageIcon>
+		<Copyright>2025</Copyright>
+
+		<!-- Build settings -->
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<ContentTargetFolders>content</ContentTargetFolders>
+		<EnableDefaultContentItems>false</EnableDefaultContentItems>
+	</PropertyGroup>
+
+	<!-- Include README in package -->
+	<ItemGroup>
+		<None Include="docs\LICENSE.md" Pack="true" PackagePath="\" />
+		<None Include="docs\icon.png" Pack="true" PackagePath="\" />
+		<None Include="docs\README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<!-- Include dist files in package -->
+	<ItemGroup>
+		<Content Include="dist\VNS.MultiLanguageTextbox\**\*.*">
+			<Pack>true</Pack>
+			<PackagePath>contentFiles\any\any\wwwroot\App_Plugins\VNS.MultiLanguageTextbox;content\wwwroot\App_Plugins\VNS.MultiLanguageTextbox</PackagePath>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+</Project>

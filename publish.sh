@@ -26,3 +26,17 @@ echo "📁 Distribution files are in: dist/VNS.MultiLanguageTextbox/"
 echo ""
 echo "Files ready for deployment:"
 ls -la dist/VNS.MultiLanguageTextbox/
+
+# Build NuGet package if .csproj exists
+if [ -f "VNS.MultiLanguageTextbox.csproj" ]; then
+    echo ""
+    echo "📦 Building NuGet package..."
+    dotnet pack VNS.MultiLanguageTextbox.csproj -c Release -o ./nupkg
+    echo "✅ NuGet package created in: nupkg/"
+    
+    # Clean up bin folder after build
+    if [ -d "bin" ]; then
+        echo "🧹 Cleaning bin folder..."
+        rm -rf bin
+    fi
+fi

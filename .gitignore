@@ -29,3 +29,15 @@ logs/
 # Temporary files
 tmp/
 temp/
+
+# Build output
+dist/
+
+# NuGet
+*.nupkg
+nupkg/
+bin/
+obj/
+
+# Version management (keep VERSION tracked)
+package.json.tmp

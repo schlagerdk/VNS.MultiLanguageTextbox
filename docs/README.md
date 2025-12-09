@@ -16,13 +16,29 @@ An Umbraco 14+ property editor plugin for handling multi-language text content.
 
 ## Installation
 
-### Method 1: From pre-built files (recommended)
+### Method 1: NuGet Package (recommended)
+
+Install via NuGet Package Manager:
+
+```bash
+dotnet add package VNS.MultiLanguageTextbox
+```
+
+Or via Package Manager Console:
+
+```powershell
+Install-Package VNS.MultiLanguageTextbox
+```
+
+The package will automatically install files to `wwwroot/App_Plugins/VNS.MultiLanguageTextbox/`.
+
+### Method 2: From pre-built files
 
 1. **Download the latest release** from GitHub
 2. **Copy the folder** `VNS.MultiLanguageTextbox` to your Umbraco installation's `wwwroot/App_Plugins/` folder
 3. **Restart your Umbraco** application
 
-### Method 2: Build from source
+### Method 3: Build from source
 
 If you want to build the plugin yourself:
 
@@ -128,15 +144,23 @@ To get values for all languages without VNS.Umbraco:
 VNS.MultiLanguageTextbox/
 ├── src/
 │   └── vns-multilanguagetextbox-property-editor-ui.element.ts
+├── docs/                           (NuGet package documentation)
+│   ├── README.md                   (Package documentation for NuGet.org)
+│   ├── LICENSE.md                  (License file)
+│   └── icon.png                    (Package icon/logo)
 ├── dist/                           (generated at build)
 │   └── VNS.MultiLanguageTextbox/
 │       ├── vns-multilanguagetextbox.js
 │       └── umbraco-package.json
+├── nupkg/                          (generated NuGet packages)
 ├── umbraco-package.json
 ├── package.json
 ├── tsconfig.json
 ├── vite.config.ts
-├── publish.sh
+├── VNS.MultiLanguageTextbox.csproj (NuGet package configuration)
+├── VERSION                         (Version number)
+├── publish.sh                      (Build script)
+├── set-version.sh                  (Version management script)
 ├── .gitignore
 ├── LICENSE
 └── README.md
@@ -173,11 +197,73 @@ npm run watch
 # Production build
 npm run build
 
-# Build and prepare distribution
+# Build and prepare distribution (includes NuGet package)
 npm run publish
 # or
 ./publish.sh
 ```
+
+### Version Management
+
+Version is managed centrally and synchronized across all files:
+
+```bash
+# Update version in package.json and .csproj
+./set-version.sh 1.0.1
+
+# Then build, commit, tag, and push
+./publish.sh
+git commit -am "Bump version to 1.0.1"
+git tag v1.0.1
+git push && git push --tags
+```
+
+**Version files:**
+- `package.json` - NPM package version
+- `VNS.MultiLanguageTextbox.csproj` - NuGet package version
+
+**Versioning strategy (Semantic Versioning):**
+- **Major (1.x.x)**: Breaking changes, incompatible API changes
+- **Minor (x.1.x)**: New features, backwards compatible
+- **Patch (x.x.1)**: Bug fixes, backwards compatible
+
+### Publishing to NuGet.org
+
+```bash
+# 1. Update version
+./set-version.sh 1.0.1
+
+# 2. Build NuGet package (automatic via publish.sh)
+./publish.sh
+
+# 3. Push to NuGet.org
+dotnet nuget push nupkg/VNS.MultiLanguageTextbox.*.nupkg \
+  --api-key YOUR_API_KEY \
+  --source https://api.nuget.org/v3/index.json
+
+# 4. Commit and tag
+git commit -am "Release v1.0.1"
+git tag v1.0.1
+git push && git push --tags
+```
+
+### Testing NuGet Package Locally
+
+```bash
+# Add local package source
+dotnet nuget add source ./nupkg -n VNSLocal
+
+# In your Umbraco project
+dotnet add package VNS.MultiLanguageTextbox --source VNSLocal
+```
+
+### Package Contents
+
+The NuGet package includes:
+- All files from `dist/VNS.MultiLanguageTextbox/` → placed in `wwwroot/App_Plugins/VNS.MultiLanguageTextbox/`
+- `docs/README.md` → package documentation (shown on NuGet.org)
+- `docs/LICENSE.md` → license file
+- `docs/icon.png` → package logo
 
 ### Project Requirements
 
