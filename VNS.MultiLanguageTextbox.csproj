@@ -7,7 +7,7 @@
 
 		<!-- NuGet Package Metadata -->
 		<PackageId>VNS.MultiLanguageTextbox</PackageId>
-		<Version>1.0.4</Version>
+		<Version>1.0.5</Version>
 		<Authors>Martin H. Schläger</Authors>
 		<Company>Vital New Software ApS</Company>
 		<Product>VNS.MultiLanguageTextbox</Product>
@@ -26,6 +26,7 @@
 		<IncludeBuildOutput>false</IncludeBuildOutput>
 		<ContentTargetFolders>content</ContentTargetFolders>
 		<EnableDefaultContentItems>false</EnableDefaultContentItems>
+		<NoWarn>$(NoWarn);NU5128</NoWarn>
 	</PropertyGroup>
 
 	<!-- Include README in package -->
@@ -39,9 +40,7 @@
 	<ItemGroup>
 		<None Include="dist\VNS.MultiLanguageTextbox\**\*.*">
 			<Pack>true</Pack>
-			<PackagePath>contentFiles\any\any\wwwroot\App_Plugins\VNS.MultiLanguageTextbox\%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
-			<PackageCopyToOutput>true</PackageCopyToOutput>
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>content\App_Plugins\VNS.MultiLanguageTextbox\%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
 		</None>
 	</ItemGroup>
 

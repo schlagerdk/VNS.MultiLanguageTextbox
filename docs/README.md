@@ -259,12 +259,27 @@ git push && git push --tags
 ### Testing NuGet Package Locally
 
 ```bash
-# Add local package source
-dotnet nuget add source ./nupkg -n VNSLocal
+# In your Umbraco project, remove old version if exists
+dotnet remove package VNS.MultiLanguageTextbox
 
-# In your Umbraco project
-dotnet add package VNS.MultiLanguageTextbox --source VNSLocal
+# Delete cached files
+rm -rf wwwroot/App_Plugins/VNS.MultiLanguageTextbox
+rm -rf obj bin
+
+# Install from local source (include NuGet.org for dependencies)
+dotnet add package VNS.MultiLanguageTextbox \
+  -s '/path/to/VNS.MultiLanguageTextbox/nupkg' \
+  -s https://api.nuget.org/v3/index.json
+
+# Or restore and build with both sources
+dotnet restore \
+  -s '/path/to/VNS.MultiLanguageTextbox/nupkg' \
+  -s https://api.nuget.org/v3/index.json
+  
+dotnet build
 ```
+
+**Important:** Always include both the local source AND nuget.org when testing locally, otherwise dependencies (like Umbraco.Cms) won't be found.
 
 ### Package Contents
 
