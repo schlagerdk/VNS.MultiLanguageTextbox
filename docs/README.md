@@ -32,6 +32,16 @@ Install-Package VNS.MultiLanguageTextbox
 
 The package will automatically install files to `wwwroot/App_Plugins/VNS.MultiLanguageTextbox/`.
 
+**Uninstalling:**
+When removing the package, you need to manually delete the folder:
+```bash
+# Remove package
+dotnet remove package VNS.MultiLanguageTextbox
+
+# Manually delete the plugin files
+rm -rf wwwroot/App_Plugins/VNS.MultiLanguageTextbox
+```
+
 ### Method 2: From pre-built files
 
 1. **Download the latest release** from GitHub
