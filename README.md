@@ -19,7 +19,7 @@ An Umbraco 14+ property editor plugin for handling multi-language text content.
 ### Method 1: From pre-built files (recommended)
 
 1. **Download the latest release** from GitHub
-2. **Copy the folder** `dist/App_Plugins/VNS.MultiLanguageTextbox` to your Umbraco installation's `wwwroot/App_Plugins/` folder
+2. **Copy the folder** `VNS.MultiLanguageTextbox` to your Umbraco installation's `wwwroot/App_Plugins/` folder
 3. **Restart your Umbraco** application
 
 ### Method 2: Build from source
@@ -28,7 +28,7 @@ If you want to build the plugin yourself:
 
 ```bash
 # 1. Clone or download the repository
-git clone https://github.com/yourusername/VNS.MultiLanguageTextbox.git
+git clone https://github.com/schlagerdk/VNS.MultiLanguageTextbox.git
 cd VNS.MultiLanguageTextbox
 
 # 2. Install dependencies
@@ -37,8 +37,8 @@ npm install
 # 3. Build the project
 npm run publish
 
-# 4. Copy dist/App_Plugins/VNS.MultiLanguageTextbox to your Umbraco installation
-cp -r dist/App_Plugins/VNS.MultiLanguageTextbox /path/to/umbraco/wwwroot/App_Plugins/
+# 4. Copy dist/VNS.MultiLanguageTextbox to your Umbraco installation
+cp -r dist/VNS.MultiLanguageTextbox /path/to/umbraco/wwwroot/App_Plugins/
 ```
 
 ### Development with watch mode
@@ -127,12 +127,11 @@ To get values for all languages without VNS.Umbraco:
 ```
 VNS.MultiLanguageTextbox/
 ├── src/
-│   └── multilanguage-textbox-property-editor-ui.element.ts
+│   └── vns-multilanguagetextbox-property-editor-ui.element.ts
 ├── dist/                           (generated at build)
-│   └── App_Plugins/
-│       └── VNS.MultiLanguageTextbox/
-│           ├── vns.multilanguagetextbox.js
-│           └── umbraco-package.json
+│   └── VNS.MultiLanguageTextbox/
+│       ├── vns-multilanguagetextbox.js
+│       └── umbraco-package.json
 ├── umbraco-package.json
 ├── package.json
 ├── tsconfig.json
