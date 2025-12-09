@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0"
+	xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<ItemGroup>
+		<!-- Include files as Content so they're copied to output and published -->
+		<Content Include="$(MSBuildThisFileDirectory)..\contentFiles\any\any\wwwroot\App_Plugins\VNS.MultiLanguageTextbox\**\*.*" Link="wwwroot\App_Plugins\VNS.MultiLanguageTextbox\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest">
+		</Content>
+	</ItemGroup>
+
+	<!-- Copy files to wwwroot after build -->
+	<Target Name="CopyVNSMultiLanguageTextboxFiles" AfterTargets="Build">
+		<ItemGroup>
+			<VNSFiles Include="$(MSBuildThisFileDirectory)..\contentFiles\any\any\wwwroot\App_Plugins\VNS.MultiLanguageTextbox\**\*.*" />
+		</ItemGroup>
+		<Copy SourceFiles="@(VNSFiles)" DestinationFiles="@(VNSFiles->'$(OutputPath)wwwroot\App_Plugins\VNS.MultiLanguageTextbox\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+	</Target>
+
+</Project>

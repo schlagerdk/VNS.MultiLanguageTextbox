@@ -7,7 +7,7 @@
 
 		<!-- NuGet Package Metadata -->
 		<PackageId>VNS.MultiLanguageTextbox</PackageId>
-		<Version>1.0.0</Version>
+		<Version>1.0.2</Version>
 		<Authors>Martin H. Schläger</Authors>
 		<Company>Vital New Software ApS</Company>
 		<Product>VNS.MultiLanguageTextbox</Product>
@@ -37,11 +37,18 @@
 
 	<!-- Include dist files in package -->
 	<ItemGroup>
-		<Content Include="dist\VNS.MultiLanguageTextbox\**\*.*">
+		<None Include="dist\VNS.MultiLanguageTextbox\**\*.*">
 			<Pack>true</Pack>
-			<PackagePath>contentFiles\any\any\wwwroot\App_Plugins\VNS.MultiLanguageTextbox;content\wwwroot\App_Plugins\VNS.MultiLanguageTextbox</PackagePath>
+			<PackagePath>contentFiles\any\any\wwwroot\App_Plugins\VNS.MultiLanguageTextbox\%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
+			<PackageCopyToOutput>true</PackageCopyToOutput>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
+		</None>
+	</ItemGroup>
+
+	<!-- Build targets to copy files to wwwroot -->
+	<ItemGroup>
+		<None Include="build\VNS.MultiLanguageTextbox.targets" Pack="true" PackagePath="build\VNS.MultiLanguageTextbox.targets" />
+		<None Include="build\VNS.MultiLanguageTextbox.targets" Pack="true" PackagePath="buildTransitive\VNS.MultiLanguageTextbox.targets" />
 	</ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 {
   "name": "vns.multilanguagetextbox",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Multi-language textbox property editor for Umbraco 14+",
   "author": "Martin H. Schläger",
   "license": "MIT",

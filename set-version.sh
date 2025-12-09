@@ -34,6 +34,17 @@ fi
 sed -i '' "s/<Version>.*<\/Version>/<Version>$VERSION<\/Version>/" VNS.MultiLanguageTextbox.csproj
 echo "✅ Updated VNS.MultiLanguageTextbox.csproj"
 
+# Update umbraco-package.json
+if command -v jq &> /dev/null; then
+    # Use jq if available (more reliable)
+    jq --arg ver "$VERSION" '.version = $ver' umbraco-package.json > umbraco-package.json.tmp && mv umbraco-package.json.tmp umbraco-package.json
+    echo "✅ Updated umbraco-package.json"
+else
+    # Fallback to sed
+    sed -i '' "s/\"version\": \".*\"/\"version\": \"$VERSION\"/" umbraco-package.json
+    echo "✅ Updated umbraco-package.json (using sed)"
+fi
+
 echo ""
 echo "✅ Version updated to $VERSION in all files!"
 echo ""
