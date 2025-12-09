@@ -1,5 +1,9 @@
 # VNS.MultiLanguageTextbox
 
+[![NuGet](https://img.shields.io/nuget/v/VNS.MultiLanguageTextbox.svg)](https://www.nuget.org/packages/VNS.MultiLanguageTextbox)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/VNS.MultiLanguageTextbox.svg)](https://www.nuget.org/packages/VNS.MultiLanguageTextbox)
+[![GitHub](https://img.shields.io/github/license/schlagerdk/VNS.MultiLanguageTextbox)](https://github.com/schlagerdk/VNS.MultiLanguageTextbox/blob/master/LICENSE)
+
 An Umbraco 14+ property editor plugin for handling multi-language text content.
 
 > **Compatibility:** Umbraco 14, 15, 16, 17+
