@@ -195,11 +195,14 @@ Hovedfilen der kan tilpasses:
 - 💡 **Feature requests**: Opret et issue med label "enhancement"
 - 🔀 **Pull requests**: Bidrag er velkomne!
 
-## Licens
+## License
 
-MIT License - Se [LICENSE](LICENSE) filen for detaljer.
+MIT License
 
-Copyright (c) 2025 VNS
+## Author
+
+Vital New Software Aps
+Martin H. Schläger
 
 ---
 
