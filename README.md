@@ -89,7 +89,28 @@ With ModelsBuilder:
 @Model.YourPropertyName
 ```
 
-To get values for all languages:
+### Using with VNS.Umbraco
+
+If you're using the [VNS.Umbraco](https://www.nuget.org/packages/VNS.Umbraco) package, you can use the convenient `GetCultureText` utility method to extract culture-specific text from the JSON data:
+
+```csharp
+@using VNS.Umbraco
+
+@{
+    // Get text for current culture - no need to cast or check for null
+    var text = Util.GetCultureText(Model.Value("propertyAlias"));
+    
+    // Or get text for a specific culture
+    var danishText = Util.GetCultureText(Model.Value("propertyAlias"), "da-DK");
+    var englishText = Util.GetCultureText(Model.Value("propertyAlias"), "en-US");
+}
+
+<p>@text</p>
+```
+
+### Manual parsing
+
+To get values for all languages without VNS.Umbraco:
 
 ```csharp
 @{
