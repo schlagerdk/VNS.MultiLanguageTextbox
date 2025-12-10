@@ -99,7 +99,7 @@ If you're using the [VNS.Umbraco](https://www.nuget.org/packages/VNS.Umbraco) pa
 @{
     // Get text for current culture - no need to cast or check for null
     var text = Util.GetCultureText(Model.Value("propertyAlias"));
-    
+
     // Or get text for a specific culture
     var danishText = Util.GetCultureText(Model.Value("propertyAlias"), "da-DK");
     var englishText = Util.GetCultureText(Model.Value("propertyAlias"), "en-US");
@@ -259,12 +259,7 @@ Main files that can be customized:
 
 ## License
 
-MIT License
-
-## Author
-
-Vital New Software Aps
-Martin H. Schläger
+[MIT](https://choosealicense.com/licenses/mit/)
 
 ---
 
