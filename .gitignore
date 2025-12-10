@@ -3,7 +3,6 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
 yarn.lock
 
 # IDE
@@ -32,12 +31,3 @@ temp/
 
 # Build output
 dist/
-
-# NuGet
-*.nupkg
-nupkg/
-bin/
-obj/
-
-# Version management (keep VERSION tracked)
-package.json.tmp
